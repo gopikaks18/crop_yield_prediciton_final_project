@@ -1,0 +1,118 @@
+{% include 'aheader.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered Farmers</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        /* Table Container */
+        .table-container {
+            width: 90%;
+            margin: auto;
+            overflow-x: auto;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Table Styling */
+        .farmers-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .farmers-table th {
+            background: #2e7d32;
+            color: white;
+            padding: 12px;
+            text-transform: uppercase;
+            font-size: 14px;
+            position: sticky;
+            top: 0;
+        }
+
+        .farmers-table td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .farmers-table tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        .farmers-table tr:hover {
+            background: #c8e6c9;
+            transition: 0.3s;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .table-container {
+                width: 100%;
+                padding: 10px;
+            }
+            th, td {
+                font-size: 12px;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>👨‍🌾 Registered Farmers</h1>
+
+<div class="table-container">
+    <table class="farmers-table">
+        <thead>
+            <tr>
+                <th>Farmer ID</th>
+                <th>Login ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Place</th>
+                <th>Phone</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for farmer in farmers %}
+            <tr>
+                <td>{{ farmer.farmer_id }}</td>
+                <td>{{ farmer.login_id }}</td>
+                <td>{{ farmer.firstname }}</td>
+                <td>{{ farmer.lastname }}</td>
+                <td>{{ farmer.place }}</td>
+                <td>{{ farmer.phone }}</td>
+                <td>{{ farmer.email }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% include 'footer.html' %}
+
+</body>
+</html>

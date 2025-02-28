@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Welcome</title>
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2e7d32;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Button Styling */
+        .btn {
+            text-decoration: none;
+            background: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .btn-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .btn {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🏡 Welcome to Our Platform!</h1>
+    <div class="btn-container">
+        <a href="login" class="btn">🔑 Login</a>
+        <a href="registration" class="btn">📝 Register</a>
+    </div>
+</body>
+</html>

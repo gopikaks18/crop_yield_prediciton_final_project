@@ -1,0 +1,230 @@
+{% include 'aheader.html' %}
+
+<body>
+    <div class="container">
+        <!-- Notification Form -->
+        <div class="form-container">
+            <h2>📢 Add Notification</h2>
+            <form action="" method="post">
+                <div class="form-group">
+                    <label for="notification">Notification:</label>
+                    <input type="text" name="notification" id="notification" class="form-input" placeholder="Enter notification" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Date:</label>
+                    <input type="date" name="date" id="date" class="form-input" required>
+                </div>
+
+                <button type="submit" name="add" class="btn-submit">➕ Add Notification</button>
+            </form>
+        </div>
+
+        <!-- Notifications Table -->
+        <br><br><h2 class="table-title">📌 Added Notifications</h2>
+        <div class="table-wrapper">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Notification</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data['view'] %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ i['notification'] }}</td>
+                        <td>{{ i['date'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table><br><br>
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+</body>
+
+<style>
+    /* General Styles */
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f4f7f6;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container {
+        max-width: 900px;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Header & Footer Styling */
+    header, footer {
+        width: 100%;
+        background-color: #ffffff;
+        padding: 15px 0;
+        text-align: center;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    }
+/* 
+    header h1, footer p {
+        margin: 0;
+        font-size: 18px;
+        color: #333;
+    } */
+
+    /* Form Styling */
+    .form-container {
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 25px;
+        width: 100%;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .form-container:hover {
+        transform: scale(1.02);
+    }
+
+    h2 {
+        color: #2e7d32;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    .form-group {
+        margin-bottom: 18px;
+        text-align: left;
+    }
+
+    label {
+        font-weight: 600;
+        color: #333;
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        outline: none;
+        transition: 0.3s;
+        font-size: 16px;
+    }
+
+    .form-input:focus {
+        border-color: #2e7d32;
+        box-shadow: 0 0 8px rgba(39, 174, 96, 0.3);
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 12px;
+        background-color: #2e7d32;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .btn-submit:hover {
+        background-color: #219150;
+    }
+
+    /* Table Styling */
+    .table-title {
+        margin-top: 30px;
+        font-size: 22px;
+        color: #2e7d32;
+        font-weight: bold;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+        margin-top: 15px;
+    }
+
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
+        background: white;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .styled-table:hover {
+        transform: scale(1.02);
+    }
+
+    .styled-table th {
+        background: #2e7d32;
+        color: white;
+        padding: 14px;
+        font-size: 16px;
+        text-transform: uppercase;
+    }
+
+    .styled-table td {
+        padding: 14px;
+        border-bottom: 1px solid #ddd;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .styled-table tr:nth-child(even) {
+        background: #f8f9fa;
+    }
+
+    .styled-table tr:hover {
+        background: #d4efdf;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+        .container {
+            width: 100%;
+            padding: 15px;
+        }
+
+        .form-container {
+            width: 100%;
+            padding: 20px;
+        }
+
+        .form-input {
+            font-size: 14px;
+        }
+
+        .btn-submit {
+            font-size: 14px;
+        }
+
+        header, footer {
+            padding: 10px;
+        }
+
+        header h1, footer p {
+            font-size: 16px;
+        }
+    }
+</style>

@@ -1,0 +1,189 @@
+{% include 'aheader.html' %}
+
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>🌱 Add Fertilizer</h2>
+            <form method="post">
+                <div class="form-group">
+                    <label for="fertilizer">Fertilizer Name:</label>
+                    <input type="text" name="fertilizer" id="fertilizer" class="form-input" required value="{% if data.up %}{{ data.up[0]['fertilizer'] }}{% endif %}">
+                </div>
+
+                <div class="form-group">
+                    <label for="crop">Crop:</label>
+                    <input type="text" name="crop" id="crop" class="form-input" required value="{% if data.up %}{{ data.up[0]['crop'] }}{% endif %}">
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea name="description" id="description" class="form-input" required>{% if data.up %}{{ data.up[0]['description'] }}{% endif %}</textarea>
+                </div>
+
+                {% if data.up %}
+                    <button type="submit" class="btn-submit" name="update">Update</button>
+                {% else %}
+                    <button type="submit" class="btn-submit" name="add">Add Fertilizer</button>
+                {% endif %}
+            </form>
+        </div>
+
+        <br><br><h2 class="table-title">🌾 Fertilizer List</h2>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>SLNO</th>
+                    <th>FERTILIZER</th>
+                    <th>CROP</th>
+                    <th>DESCRIPTION</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data.view %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ item['fertilizer'] }}</td>
+                    <td>{{ item['crop'] }}</td>
+                    <td>{{ item['description'] }}</td>
+                    <td>
+                        <a href="?action=update&id={{ item['fertilizer_id'] }}" class="update-btn">Update</a>
+                        <a href="?action=delete&id={{ item['fertilizer_id'] }}" class="delete-btn" onclick="return confirm('Are you sure?');">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div><br><br><br>
+
+    {% include 'footer.html' %}
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .form-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: #2e7d32;
+            box-shadow: 0 0 5px rgba(46, 125, 50, 0.3);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 10px;
+            background-color: #2e7d32;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #1b5e20;
+        }
+
+        .table-title {
+            margin-top: 30px;
+            font-size: 22px;
+            color: #2e7d32;
+        }
+
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .styled-table th {
+            background: #2e7d32;
+            color: white;
+            padding: 10px;
+        }
+
+        .styled-table td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            background: white;
+        }
+
+        .styled-table tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        .styled-table tr:hover {
+            background: #c8e6c9;
+        }
+
+        .update-btn {
+            background: #ffc107;
+            color: #000;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .delete-btn {
+            background: #d32f2f;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .update-btn:hover {
+            background: #e6a700;
+        }
+
+        .delete-btn:hover {
+            background: #b71c1c;
+        }
+    </style>
+</body>
