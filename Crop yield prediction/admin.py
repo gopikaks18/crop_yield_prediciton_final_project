@@ -24,6 +24,7 @@ def view_fertilizer():
     return render_template('view_fertilizer.html', fertilizer=fertilizer)
 
 
+
 @admin.route('/add_fertilizer',methods=['get','post'])
 def add_fertilizer():
     data={}

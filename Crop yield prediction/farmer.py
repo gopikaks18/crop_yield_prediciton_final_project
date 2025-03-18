@@ -41,16 +41,23 @@ def farmer_about():
 def farmer_service():
     return render_template("service.html")
 
+@farmer.route('/view_notification')
+def view_notification():
+    data={}
+    qry = "SELECT * FROM notification"
+    data['view'] = select(qry)
+    return render_template('view_notification.html', data = data)
+
 
 from flask import Flask, render_template, redirect, url_for, session
 
 app = Flask(__name__)
-app.secret_key = "your_secret_key"  # Required for session management
+app.secret_key = "your_secret_key"  
 
 @farmer.route('/logout')
 def logout():
-    session.pop('user_id', None)  # Remove user session
-    return redirect(url_for('public.login'))  # Redirect to login page
+    session.pop('user_id', None)  
+    return redirect(url_for('public.login'))  
 
 
 @farmer.route('/login', methods=['GET', 'POST'])
