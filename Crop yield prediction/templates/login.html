@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,83 +8,175 @@
     <style>
         /* General Page Styling */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+            height: 100vh;
+            background-image: url('https://images8.alphacoders.com/417/417053.jpg'); /* Background image */
+            background-size: cover;
+            background-position: center;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            overflow: hidden;
+            animation: fadeIn 1.5s ease-out; /* Fade in animation for the body */
         }
 
         /* Login Form Container */
         .login-container {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            width: 320px;
+            padding: 28px; /* Reduced padding */
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+            width: 90%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.85); /* Subtle white background for readability */
+            backdrop-filter: blur(10px); /* Blurring effect */
             text-align: center;
+            animation: formSlide 1s ease-out; /* Animation for form sliding in */
+            box-sizing: border-box;
         }
 
         h2 {
-            color: #2e7d32;
+            color: green;
             margin-bottom: 20px;
+            font-size: 28px; /* Increased font size for the heading */
+            font-weight: bold;
         }
 
         /* Input Fields */
         .input-group {
             position: relative;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .input-group input {
-            width: 100%;
-            padding: 12px 15px;
+            width: 95%;
+            padding: 10px 8px; /* Increased padding for larger input fields */
             border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 30px; /* Rounded input fields */
+            font-size: 14px; /* Increased text size inside input fields */
             outline: none;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9; /* Light background for input fields */
         }
 
+        /* Hover and Focus Effects for Input Fields */
+        .input-group input:hover,
         .input-group input:focus {
-            border-color: #2e7d32;
-            box-shadow: 0 0 5px rgba(46, 125, 50, 0.3);
+            border-color: #34b6ff;
+            box-shadow: 0 0 8px rgba(52, 182, 255, 0.3);
+            animation: shake 0.3s ease-in-out; /* Shake animation on focus */
         }
 
         /* Submit Button */
         .btn {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             border: none;
-            background: #2e7d32;
+            background: #34b634; /* Green button color */
             color: white;
-            font-size: 18px;
+            font-size: 18px; /* Increased font size for the button */
             font-weight: bold;
-            border-radius: 8px;
+            border-radius: 30px; /* Rounded button */
             cursor: pointer;
-            transition: 0.3s;
+            transition: background 0.3s ease;
         }
 
         .btn:hover {
-            background: #1b5e20;
+            background: #2e8b32; /* Darker green on hover */
+        }
+
+        /* Forgot Password */
+        .forgot-password {
+            margin-top: 15px;
+            font-size: 16px; /* Increased font size */
+            color: #34b6ff;
+        }
+
+        .forgot-password a {
+            text-decoration: none;
+            color: #34b6ff;
+            font-weight: bold;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes formSlide {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-5px);
+            }
+            50% {
+                transform: translateX(5px);
+            }
+            75% {
+                transform: translateX(-5px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .login-container {
+                padding: 20px;
+                max-width: 90%;
+            }
+
+            h2 {
+                font-size: 24px; /* Smaller heading on mobile */
+            }
+
+            .btn {
+                font-size: 16px; /* Smaller button text on mobile */
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="login-container">
         <h2>🔑 Login</h2>
         <form action="" method="post">
             <div class="input-group">
-                <input type="text" name="uname" placeholder="Username" required>
+                <input type="text" name="uname" placeholder="Username" required aria-label="Username">
             </div>
             <div class="input-group">
-                <input type="password" name="pswd" placeholder="Password" required>
+                <input type="password" name="pswd" placeholder="Password" required aria-label="Password">
             </div>
             <button type="submit" name="submit" class="btn">Login</button>
+
+            <div class="forgot-password">
+                <a href="/forgot-password" aria-label="Forgot Password">Forgot Password?</a>
+            </div>
         </form>
     </div>
 </body>
+
 </html>

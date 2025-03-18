@@ -5,8 +5,8 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Index - AgriCulture Bootstrap Template</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+  <meta name="description" content="AgriCulture is a modern farming template with AI-powered features">
+  <meta name="keywords" content="farming, agriculture, technology, fertilizer, crop, AI, chatbot">
 
   <!-- Favicons -->
   <link href="static/assets/img/favicon.png" rel="icon">
@@ -15,7 +15,7 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Marcellus:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Marcellus:wght@400&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -26,8 +26,6 @@
 
   <!-- Main CSS File -->
   <link href="static/assets/css/main.css" rel="stylesheet">
-
-  
 </head>
 
 <body class="index-page">
@@ -35,27 +33,39 @@
   <header id="header" class="header d-flex align-items-center position-relative">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
+      <!-- Logo -->
       <a href="/farmer_home" class="logo d-flex align-items-center">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <img src="static/assets/img/logo.png" alt="AgriCulture">
-        <!-- <h1 class="sitename">AgriCulture</h1>  -->
+        <img src="static/assets/img/logo.png" alt="AgriCulture" class="logo-img">
       </a>
 
+      <!-- Navigation Menu -->
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="/farmer_home" class="active">Home</a></li>
           <li><a href="/about">About Us</a></li>
           <li><a href="/service">Services</a></li>
-
-
           <li><a href="/view_fertilizer">About Fertilizer</a></li>
           <li><a href="/add_complaint">Complaint</a></li>
           <li><a href="/view_notification">Notifications</a></li>
-          <li><a href="/farmer_home">AI chatbot</a></li>
-          <li><a href="/farmer_home">Crop yield recommendation system</a></li>
+          <li><a href="/farmer_home">AI Chatbot</a></li>
+          <li><a href="/farmer_home">Crop Yield Recommendation System</a></li>
           <li><a class="nav-link text-danger" href="{{ url_for('farmer.logout') }}">Logout</a></li>
         </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list" aria-label="Toggle navigation menu"></i>
       </nav>
     </div>
   </header>
+
+  <script>
+    // Ensure mobile nav toggle works
+    document.querySelector('.mobile-nav-toggle').addEventListener('click', function () {
+      const navMenu = document.querySelector('#navmenu');
+      navMenu.classList.toggle('active');
+      const isExpanded = navMenu.classList.contains('active');
+      this.setAttribute('aria-expanded', isExpanded);
+    });
+  </script>
+
+</body>
+
+</html>
