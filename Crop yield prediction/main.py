@@ -28,4 +28,4 @@ app.register_blueprint(notification)
 
 app.register_blueprint(complaint)
 
-app.run(debug=True)
+app.run(debug=True,port=5007)

@@ -32,6 +32,46 @@ def login():
     return render_template("login.html")
 
 
+
+
+
+@public.route('/forgot_password',methods=['get','post'])
+def forgot_password():
+    if 'submit' in request.form:
+        email = request.form['email']
+
+        qry="select * from farmer where email='%s'" %(email)
+        a=select(qry)
+        if a:
+            login_id=a[0]['login_id']
+            return f"<script>alert('Email Verified');window.location='/new_password?id={login_id}'</script>"
+        else:
+            return "<script>alert('This email id is not registered'); window.history.back();</script>"
+
+    return render_template("forgot_password.html")
+
+
+
+
+
+@public.route('/new_password',methods=['get','post'])
+def new_password():
+    id=request.args['id']
+    if 'submit' in request.form:
+        npass = request.form['npass']
+        cpass = request.form['cpass']
+
+        if npass==cpass:
+            qry="update login set password='%s' where login_id='%s'"%(npass,id)
+            update(qry)
+            return "<script>alert('Password updated');window.location='login'</script>"
+        else:
+            return "<script>alert('Password doesnot match');window.history.back()</script>"
+
+    return render_template("new_password.html")
+
+
+
 @public.route('/registration',methods=['get','post'])
 def registration():
     if 'register' in request.form:
