@@ -1,7 +1,7 @@
 from flask import *
 
 from database import *
-from knn import newpredict_farmer_cropss
+# from knn import newpredict_farmer_cropss
 
 farmer = Blueprint('farmer',__name__)
 
@@ -73,76 +73,61 @@ def login():
 ################################################################################################
 
 
-from knn import *
+# from knn import *
+from flask import render_template, request
+import pandas as pd
+import pickle
+import numpy as np
 
 @farmer.route('/crop_rec', methods=['POST', 'GET'])
 def crop_rec():
+    result = None  # Default result value
+    
     if request.method == 'POST':
-        try:
-            # Get input parameters from form
-            params = {
-                'moisture': float(request.form['mois']),
-                'ph': float(request.form['ph']),
-                'nitrogen': float(request.form['nitro']),
-                'phosphorus': float(request.form['phos']),
-                'potassium': float(request.form['pot']),
-                'humidity': float(request.form['hum']),  # Changed from 'humi' to 'hum' to match HTML
-                'rainfall': float(request.form['rain'])  # Changed from 'rainfall' to 'rain' to match HTML
-            }
-            
-            # Calculate crop parameter ranges
-            crop_values = calculate_crop_ranges(params)
-            
-            # Get crop prediction
-            result = newpredict_farmer_cropss(crop_values)
-            
-            # Prepare response
-            response_data = {
-                'result': result,
-                'input_params': params
-            }
-            
-            return render_template('F_crop_rec.html', result=result)
-            
-        except Exception as e:
-            # Handle errors gracefully
-            error_response = {
-                'result': f"Error: {str(e)}",
-                'input_params': {}
-            }
-            return render_template('crop_prediction.html', result=result)
-    
-    # If it's a GET request, just render the form
-    return render_template('crop_prediction.html', result=[])
+        # Get input values from the form
+        state_name = request.form['state']
+        district_name = request.form['district']
+        crop_year = int(request.form['year'])
+        season = request.form['season']
+        crop = request.form['crop']
+        area = float(request.form['area'])
 
-def calculate_crop_ranges(params):
-    """Calculate the ranges for crop parameters based on input values."""
-    crop_values = []
-    
-    # Moisture range (±10%)
-    moisture_base = params['moisture'] * 10
-    crop_values.extend([moisture_base, moisture_base + 10])
-    
-    # pH range (-2 to +4)
-    crop_values.extend([params['ph'] - 2, params['ph'] + 4])
-    
-    # Nitrogen range (±1%)
-    nitrogen_base = params['nitrogen'] / 100
-    crop_values.extend([nitrogen_base - 1, nitrogen_base + 1])
-    
-    # Phosphorus range (±1%)
-    phosphorus_base = params['phosphorus'] / 100
-    crop_values.extend([phosphorus_base - 1, phosphorus_base + 1])
-    
-    # Potassium range (±1%)
-    potassium_base = params['potassium'] / 100
-    crop_values.extend([potassium_base - 1, potassium_base + 1])
-    
-    # Temperature range (fixed)
-    crop_values.extend([20, 38])  # temp_low, temp_high
-    
-    return crop_values
+        # Load the trained model, scaler, and label encoders
+        with open('knn_crop_yield_model.pkl', 'rb') as f:
+            model = pickle.load(f)
+        
+        with open('scaler.pkl', 'rb') as f:
+            scaler = pickle.load(f)
+        
+        with open('label_encoders.pkl', 'rb') as f:
+            label_encoders = pickle.load(f)
 
+        # Create a DataFrame from user input
+        new_data = pd.DataFrame({
+            'State_Name': [state_name],
+            'District_Name': [district_name],
+            'Crop_Year': [crop_year],
+            'Season': [season],
+            'Crop': [crop],
+            'Area': [area]
+        })
+        
+        # Preprocess categorical values
+        for col in ['State_Name', 'District_Name', 'Season', 'Crop']:
+            if col in new_data.columns:
+                le = label_encoders[col]
+                new_data[col] = new_data[col].map(lambda x: le.transform([x])[0] if x in le.classes_ else -1)
+                if (new_data[col] == -1).any():
+                    print(f"Warning: Unknown categories found in {col}")
+        
+        # Scale the input features
+        X_new_scaled = scaler.transform(new_data[['State_Name', 'District_Name', 'Crop_Year', 'Season', 'Crop', 'Area']])
+        
+        # Predict crop yield
+        prediction = model.predict(X_new_scaled)
+        result = f"Predicted Production: {prediction[0]:.2f}"
+    
+    return render_template('crop_prediction.html', result=result)
 
 
 

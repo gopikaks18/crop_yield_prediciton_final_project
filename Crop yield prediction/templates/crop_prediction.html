@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #6C8A4F;
+            --primary: #2e7d32;
             --secondary: #A7C47C;
             --background: #E2E0C8;
             --text: #818C78;
@@ -32,7 +32,7 @@
 
         h1 {
             text-align: center;
-            color: var(--primary);
+            color: #2e7d32;
             font-family: 'Merriweather', serif;
             font-size: 1.8rem;
             margin-top: 60px;
@@ -181,39 +181,36 @@
     <div class="form-container">
         <form method="post" id="productForm">
             <div class="form-group">
-                <label class="form-label">Nitrogen</label>
-                <input type="text" id="name" name="nitro" class="form-input" required>
+                <label class="form-label">State_Name</label>
+                <input type="text" id="name" name="state" class="form-input" required>
             </div>
 
             <div class="form-group">
-                <label class="form-label">Phosphorus</label>
-                <input type="text" id="description" name="phos" class="form-input" required>
+                <label class="form-label">District_Name</label>
+                <input type="text" id="description" name="district" class="form-input" required>
             </div>
 
             <div class="form-group">
-                <label class="form-label">Potassium</label>
-                <input type="text" id="price" name="pot" class="form-input" required>
+                <label class="form-label">Crop_Year</label>
+                <input type="text" id="price" name="year" class="form-input" required>
             </div>
 
             <div class="form-group">
-                <label class="form-label">Moisture</label>
-                <input type="text" id="stock" name="mois" class="form-input" required>
+                <label class="form-label">Season</label>
+                <input type="text" id="stock" name="season" class="form-input" required>
             </div>
 
             <div class="form-group">
-                <label class="form-label">Humidity</label>
-                <input type="text" id="stock" name="hum" class="form-input" required>
+                <label class="form-label">Crop</label>
+                <input type="text" id="stock" name="crop" class="form-input" required>
             </div>
 
             <div class="form-group">
-                <label class="form-label">PH Value</label>
-                <input type="text" id="stock" name="ph" class="form-input" required>
+                <label class="form-label">Area</label>
+                <input type="text" id="stock" name="area" class="form-input" required>
             </div>
 
-            <div class="form-group">
-                <label class="form-label">Rainfall</label>
-                <input type="text" id="stock" name="rain" class="form-input" required>
-            </div>
+            
 
             <button type="submit" name="submit" class="submit-btn">
                 <i class='bx bx-plus-circle'></i>
